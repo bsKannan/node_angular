@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   constructor(private _myservice: MyserviceService,
-    private _router: Router,
+    private router: Router,
     private _activatedRoute: ActivatedRoute) {
     this.loginForm = new FormGroup({
       email: new FormControl(null, Validators.required),
@@ -37,7 +37,9 @@ export class LoginComponent implements OnInit {
           data => {
             console.log(data);
             localStorage.setItem('token', data.toString());
-            this._router.navigate(['/dash']);
+            // this._router.navigateByUrl('/dash');
+            // this._router.navigateByUrl('dash')
+            this.router.navigate(['../dash'])
           },
           error => { }
         );
@@ -45,6 +47,6 @@ export class LoginComponent implements OnInit {
   }
 
   movetoregister() {
-    this._router.navigate(['../register'], { relativeTo: this._activatedRoute });
+    this.router.navigate(['../register'], { relativeTo: this._activatedRoute });
   }
 }
